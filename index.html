@@ -47,8 +47,20 @@
             console.log($(this).attr("jewelry"))
         })
 
+        // var a = Math.floor(Math.random() * 10) 
+        // var a = Math.floor(Math.random() * 20) 
+        // var a = Math.floor(Math.random() * 10-1+1) +1; //1,10
 
-        
+
+        function randNumGenerator(max, min) {
+            var a = Math.floor(Math.random() * (max - min + 1)) + min; // 0,10
+            return a
+        }
+
+        console.log(randNumGenerator(20, 15))
+
+
+
 
 
     </script>
