@@ -51,16 +51,19 @@
         // var a = Math.floor(Math.random() * 20) 
         // var a = Math.floor(Math.random() * 10-1+1) +1; //1,10
 
+        var numberToGuess = 0
 
         function randNumGenerator(max, min) {
             var a = Math.floor(Math.random() * (max - min + 1)) + min; // 0,10
             return a
         }
 
-        console.log(randNumGenerator(20, 15))
+        function initializeGame(max, min){
+            numberToGuess = randNumGenerator(120,19) 
+        }
 
-
-
+        initializeGame()
+        console.log(numberToGuess)
 
 
     </script>
