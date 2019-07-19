@@ -5,90 +5,105 @@
     <meta charset="UTF-8">
     <title>gem-calculate-game</title>
     <style type="text/css">
+        body {
+            background-color: grey;
+        }
+
         img {
             width: 150px;
             height: 150px;
         }
-
-        
     </style>
 </head>
 
 <body>
 
     <p>Number To Guess <span class="guess"></span></p>
-    
+
     <p>Your Score is <span class="score"></span></p>
 
-    <img class="crystal" data-index="0" src="https://www.gemselect.com/graphics/red-spinel-gemstone-small-gemselect-1.jpg" alt="redgem" jewelry="r">
+    <img class="crystal" data-index="0"
+        src="https://www.gemselect.com/graphics/red-spinel-gemstone-small-gemselect-1.jpg" alt="redgem" jewelry="r">
 
-    <img class="crystal" data-index="1" src="https://img.heypik.com/png-vector/20190122/eps-cartoon-diamond-vector-download-heypik-6XU46DN.jpg?x-oss-process=image/resize,m_fixed,w_264/crop,w_264,h_350/sharpen,100/quality,q_80"
+    <img class="crystal" data-index="1"
+        src="https://img.heypik.com/png-vector/20190122/eps-cartoon-diamond-vector-download-heypik-6XU46DN.jpg?x-oss-process=image/resize,m_fixed,w_264/crop,w_264,h_350/sharpen,100/quality,q_80"
         alt="bluegem" jewelry="1">
 
-    <img class="crystal" data-index="2" src="http://premierastro.com/images/gallery/gem_5.jpg" alt="yellowgem" jewelry="y">
+    <img class="crystal" data-index="2" src="http://premierastro.com/images/gallery/gem_5.jpg" alt="yellowgem"
+        jewelry="y">
 
-    <img class="crystal" data-index="3" src="http://gem2000.com/news/wp-content/uploads/2011/03/TourmalineChrome3.17ct9.5x8.1mmEmeraldCutGBBFX_sm.jpg"
+    <img class="crystal" data-index="3"
+        src="http://gem2000.com/news/wp-content/uploads/2011/03/TourmalineChrome3.17ct9.5x8.1mmEmeraldCutGBBFX_sm.jpg"
         alt="greengem" jewelry="g">
 
-    <p>Wins</p>
-    <p>Loses</p>
-    <p>Your Total Score is:</p>
+    <p>Wins <span class="www"></span></p>
+    <p>Loses <span class="lll"></span></p>
+
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
     <script type="text/javascript">
 
-        // var win = 0;
-        // var lose = 0;
-        // var totalScore = 0;
-        // var gems = ['red', 'blue', 'yellow', 'green'];
-
-        // function displayGame() {
-        //     $('p').eq(0).text(win);
-        //     $('p').eq(1).text(lose);
-        //     $('p').eq(2).text(totalScore);
-
-        // }
 
 
-        
+
         // var a = Math.floor(Math.random() * 10) 
         // var a = Math.floor(Math.random() * 20) 
         // var a = Math.floor(Math.random() * 10-1+1) +1; //1,10
 
         var numberToGuess = 0
+        var score = 0
         var crystals
-        var score
         var index
+        var wins = 0
+        var loses = 0
         function randNumGenerator(max, min) {
             var a = Math.floor(Math.random() * (max - min + 1)) + min; // 0,10
             return a
         }
 
-        function initializeGame(max, min) {
+        function initializeGame() {
+            score = 0
             numberToGuess = randNumGenerator(120, 19)
             crystals = []
-            for(var i=0; i<4; i++){
-                crystals.push(randNumGenerator(12,1))
+            for (var i = 0; i < 4; i++) {   // i = i+1
+                crystals.push(randNumGenerator(12, 1))
             }
             console.log(crystals)
-
         }
+
 
         function displayToHtml() {
             $('.guess').text(numberToGuess);
-            $('.score').text();
-
+            $('.score').text(score);
+            $('.www').text(wins);
+            $('.lll').text(loses);
         }
 
         $('.crystal').on('click', function () {
             index = $(this).attr("data-index")
+            console.log($(this).attr("data-index"))
+            score += crystals[index] // score = score + crystals[index]
             console.log(crystals[index])
-        })
+            displayToHtml()
 
+            if (score == numberToGuess) {
+                wins++
+                alert("You Won");
+                initializeGame()
+                displayToHtml()
+            }
+            if (score > numberToGuess) {
+                loses++
+                alert("You Lose");
+                initializeGame()
+                displayToHtml()
+            }
+        })
 
         initializeGame()
         displayToHtml()
+
         // console.log(numberToGuess)
 
 
